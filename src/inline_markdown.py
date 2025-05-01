@@ -87,6 +87,22 @@ def split_nodes_link(old_nodes):
     return new_nodes
 
 
+def text_to_textnodes(text):
+    node = TextNode(text, TextType.TEXT)
+    nodes = [node]
+
+    for delimiter, text_type in {
+        "**": TextType.BOLD,
+        "_": TextType.ITALIC,
+        "`": TextType.CODE,
+    }.items():
+        nodes = split_nodes_delimiter(nodes, delimiter, text_type)
+
+    nodes = split_nodes_link(split_nodes_image(nodes))
+
+    return nodes
+
+
 if __name__ == "__main__":
     node = TextNode(
         "This is ![second image](https://i.imgur.com/3elNhQu.png) text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
@@ -101,3 +117,9 @@ if __name__ == "__main__":
     )
     new_nodes = split_nodes_link([node])
     print(new_nodes)
+
+    print(
+        text_to_textnodes(
+            "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        )
+    )
