@@ -1,6 +1,5 @@
 import unittest
 from htmlnode import HTMLNode, LeafNode, ParentNode
-from textnode import TextNode, TextType, text_node_to_html_node
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -49,7 +48,7 @@ class TestHTMLNode(unittest.TestCase):
             node.__repr__(),
             "HTMLNode(p, What a strange world, children: None, {'class': 'primary'})",
         )
-    
+
     def test_leaf_to_html_p(self):
         node = LeafNode("p", "Hello, world!")
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
@@ -62,9 +61,9 @@ class TestHTMLNode(unittest.TestCase):
         )
 
     def test_to_html_with_children(self):
-            child_node = LeafNode("span", "child")
-            parent_node = ParentNode("div", [child_node])
-            self.assertEqual(parent_node.to_html(), "<div><span>child</span></div>")
+        child_node = LeafNode("span", "child")
+        parent_node = ParentNode("div", [child_node])
+        self.assertEqual(parent_node.to_html(), "<div><span>child</span></div>")
 
     def test_to_html_with_grandchildren(self):
         grandchild_node = LeafNode("b", "grandchild")
@@ -104,7 +103,6 @@ class TestHTMLNode(unittest.TestCase):
             node.to_html(),
             "<h2><b>Bold text</b>Normal text<i>italic text</i>Normal text</h2>",
         )
-
 
 
 if __name__ == "__main__":
