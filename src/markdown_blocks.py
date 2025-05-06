@@ -139,24 +139,3 @@ def quote_to_html_node(block):
     content = " ".join(new_lines)
     children = text_to_children(content)
     return ParentNode("blockquote", children)
-
-
-if __name__ == "__main__":
-    md1 = """
-This is **bolded** paragraph
-text in a p
-tag here
-
-This is another paragraph with _italic_ text and `code` here
-
-"""
-    md2 = """
-    ```
-    This is text that _should_ remain
-    the **same** even with inline stuff
-    ```
-    """
-    for md in [md1, md2]:
-        node = markdown_to_html_node(md)
-        html = node.to_html()
-        print(html)
