@@ -29,7 +29,7 @@ def markdown_to_blocks(markdown):
 def block_to_block_type(block):
     if re.match(r"^(#{1,6}) ", block):
         return BlockType.HEADING
-    if re.fullmatch(r"(`{1,3})([\s\S]*?)(`{1,3})", block, re.M):
+    if re.fullmatch(r"(`{3})([\s\S]*?)(`{3})", block, re.M):
         return BlockType.CODE
     if re.match(r"^>", block, re.M):
         return BlockType.QUOTE
